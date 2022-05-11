@@ -5,6 +5,7 @@ const cors = require("cors");
 app.use(formidableMiddleware());
 app.use(cors());
 const axios = require("axios");
+const { rmSync } = require("fs");
 require("dotenv").config();
 
 const API_KEY = process.env.API_KEY;
@@ -19,6 +20,10 @@ app.get("/getAllCharacters", async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+});
+
+app.get("*", (req, res) => {
+  res.json("page introuvable");
 });
 
 app.listen(process.env.PORT, () => {
